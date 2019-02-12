@@ -1,0 +1,24 @@
+이러한 내용의 application.properties가 필요하다.
+
+#encoding
+spring.http.encoding.charset=UTF-8
+spring.http.encoding.enabled=true
+spring.http.encoding.force=true
+
+#mvc
+spring.mvc.view.prefix =/WEB-INF/views/
+spring.mvc.view.suffix =.jsp
+server.error.whitelabel.enabled=false
+
+#messages
+spring.messages.basename=messages
+spring.messages.encoding=UTF-8
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://db주소
+spring.datasource.username=ID
+spring.datasource.password=비번
+
+mybatis.configuration.map-underscore-to-camel-case=true
+mybatis.type-aliases-package=com.smtown.example.kotlindemo.model
+mybatis.mapper-locations=mybatis/mapper/**/*.xml
