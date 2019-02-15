@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository
 @Repository
 interface MemberMapper {
     fun getAllMemberList() : List<Member>
+    fun deleteMembers(deleteMembers : List<Int>) : Int
 }

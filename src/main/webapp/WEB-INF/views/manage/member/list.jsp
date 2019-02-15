@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 목록</title>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <style>
     .text-center{text-align:center}
@@ -23,10 +24,56 @@
 
 <body>
 <h1 style="text-align:center;"> MemberLIst </h1>
-<br/>
-<br/>
+<br/><br/>회원관리
+<br/><br/>
 총 ${totalCount} 명<br/>
 
+<table>
+    <thead>
+    <tr>
+        <th><input type="checkbox" id="check_all" /></th>
+        <th>m_id</th>
+        <th>ID</th>
+        <th>이름</th>
+        <th>메일</th>
+        <th>상태</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="member" items="${memberList}" varStatus="status">
+        <tr>
+            <td class="text-center">
+                <input type="checkbox" name="chk" value="${member.m_id}" />
+            </td>
+            <td class="text-center">
+                    ${member.m_id}
+            </td>
+            <td class="text-center">
+                    ${member.id}
+            </td>
+            <td class="text-center">
+                    ${member.name}
+            </td>
+            <td class="text-center">
+                    ${member.email}
+            </td>
+            <td class="text-center">
+                    ${member.status}
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+<br/>
+<button type="button" onclick="deleteChk()">회원 삭제</button><br/>
+
+
+<div class="wrap-loading" style="display: none">
+    <div><img src="/resources/images/ajax-loader7.gif"/></div>
+</div>
+
+
+<br/><br/>테스트
 <table>
     <thead>
     <tr>
@@ -62,5 +109,67 @@
 
 <br/>
 <a href="/">메인으로</a>
+<script>
+
+    $(document).ready(function(){
+        $("#check_all").click(function(){
+            if($("#check_all").prop("checked")){
+                $("input[name='chk']").prop("checked",true);
+            }else{
+                $("input[name='chk']").prop("checked",false);
+            }
+        })
+    });
+
+    function deleteChk() {
+        var deleteMembers = new Array();
+
+        $("input[name='chk']:checked").each(function () {
+            deleteMembers.push($(this).val());
+        });
+        if(deleteMembers.length < 1) {
+            alert("삭제할 대상을 선택하세요.");
+            return false;
+        }
+
+        console.log("### deleteArr => "+JSON.stringify({ 'deleteMembers': deleteMembers }));
+        // deleteMembers = JSON.stringify({ 'deleteMembers': deleteMembers });
+
+        if(confirm("정보를 삭제 하시겠습니까?")) {
+            $(".wrap-loading").show();
+            $.ajax({
+                url: "/manage/member/delete",
+                type: "POST",
+                data: JSON.stringify({ 'deleteMembers': deleteMembers }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success:function(response){
+                    if(response && response.result) {
+                        alert( "success" );
+                        console.log("총 삭제된 멤버수 : " +response);
+                    } else {
+                        $(".wrap-loading").hide();
+                        alert( "error" );
+                        return false;
+                    }
+                }
+            });
+
+            //
+            // $.post("/manage/member/delete", { 'deleteMembers': deleteMembers }, function(response) {
+            //     alert( "success" );
+            //     console.log("총 삭제된 멤버수 : " +response);
+            // })
+            //     .fail(function () {
+            //         $(".wrap-loading").hide();
+            //         alert( "error" );
+            //         return false;
+            //     });
+        } else {
+            $(".wrap-loading").hide();
+            return false;
+        }
+    }
+</script>
 </body>
 </html>

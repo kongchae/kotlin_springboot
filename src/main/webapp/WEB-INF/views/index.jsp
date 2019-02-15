@@ -1,10 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"
 %><%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>피아노 공간</title>
+    <title>연습실 및 레슨 공간</title>
 
     <script language="javascript">
         function show_lesson_popup() { window.open("/lesson", "a", "width=600, height=400, left=100, top=50"); }
@@ -14,7 +15,7 @@
 <body>
 !!!! 여기는 WEB-INF의 views의 JSP index 입니다
 
-<h1 style="text-align:center;"> 피 아 노  공 간</h1>
+<h1 style="text-align:center;"> 연 습 실  공 간</h1>
 
 <div style="text-align:center;">
     <img src="/resources/images/moon.png" width="25%">
@@ -24,7 +25,6 @@
 <br/>
 <br/>
 <div style="text-align:center;">
-    <span>학원안내</span>&nbsp
     <span onclick="show_member_popup()" style="cursor:pointer;">회원관리</span>&nbsp
     <span onclick="show_lesson_popup()" style="cursor:pointer;">레슨시간표</span>&nbsp
     <span>연습실예약</span>&nbsp

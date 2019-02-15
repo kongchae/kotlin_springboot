@@ -9,4 +9,19 @@
         FROM `member`
         ORDER BY `m_id` DESC
     </select>
+
+    <delete id="deleteMembers" parameterType="list">
+        DELETE
+        FROM `member`
+        <where>
+            `m_id` = 0
+            <if test = "list != null">
+                OR
+                <foreach collection="list" item="memberId" separator=",">
+                    `m_id` = #{memberId}
+                </foreach>
+            </if>
+        </where>
+    </delete>
+
 </mapper>

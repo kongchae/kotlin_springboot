@@ -8,6 +8,7 @@
     <typeAliases>
         <typeAlias alias="hashMap" type="java.util.HashMap" />
         <typeAlias alias="map" type="java.util.Map" />
+        <typeAlias alias="list" type="java.util.List" />
         <package name="com.smtown.example.kotlindemo.model" />
     </typeAliases>
 
