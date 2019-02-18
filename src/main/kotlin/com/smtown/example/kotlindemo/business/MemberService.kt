@@ -20,7 +20,6 @@ class MemberService {
     }
 
     fun deleteMembers(deleteMembers : List<Int>) : Int {
-        println("[MemberService] ${deleteMembers.size}명 삭제")
         return memberMapper.deleteMembers(deleteMembers)
     }
 }

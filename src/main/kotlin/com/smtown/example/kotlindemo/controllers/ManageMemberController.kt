@@ -33,7 +33,7 @@ class ManageMemberController {
 
         println("${deleteMembers.size}명 삭제합니다.")
         val deleteCnt : Int = memberService.deleteMembers(deleteMembers)
-        if(deleteCnt < 1) {
+        if(deleteCnt > 0) {
             println("${deleteMembers.size}명 삭제완료")
         } else {
             println("Delete Members Error!")

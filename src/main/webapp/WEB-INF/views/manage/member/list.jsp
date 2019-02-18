@@ -25,7 +25,11 @@
 <body>
 <h1 style="text-align:center;"> MemberLIst </h1>
 <br/><br/>회원관리
-<br/><br/>
+<br/>
+<div class="wrap-loading" style="display: none">
+    <div><img src="/resources/images/ajax-loader7.gif"/></div>
+</div>
+<br/>
 총 ${totalCount} 명<br/>
 
 <table>
@@ -66,11 +70,6 @@
 </table>
 <br/>
 <button type="button" onclick="deleteChk()">회원 삭제</button><br/>
-
-
-<div class="wrap-loading" style="display: none">
-    <div><img src="/resources/images/ajax-loader7.gif"/></div>
-</div>
 
 
 <br/><br/>테스트
@@ -140,18 +139,19 @@
             $.ajax({
                 url: "/manage/member/delete",
                 type: "POST",
-                data: JSON.stringify({ 'deleteMembers': deleteMembers }),
+                data: JSON.stringify(deleteMembers),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success:function(response){
-                    if(response && response.result) {
-                        alert( "success" );
-                        console.log("총 삭제된 멤버수 : " +response);
-                    } else {
-                        $(".wrap-loading").hide();
-                        alert( "error" );
-                        return false;
-                    }
+                success:function(response) {
+                    $(".wrap-loading").hide();
+                    alert( "success" );
+                    console.log("총 삭제된 멤버수 : " +response);
+                    document.location.reload();
+                },
+                error: function() {
+                    alert( "error" );
+                    $(".wrap-loading").hide();
+                    return false;
                 }
             });
 
@@ -161,8 +161,8 @@
             //     console.log("총 삭제된 멤버수 : " +response);
             // })
             //     .fail(function () {
-            //         $(".wrap-loading").hide();
             //         alert( "error" );
+            //         $(".wrap-loading").hide();
             //         return false;
             //     });
         } else {

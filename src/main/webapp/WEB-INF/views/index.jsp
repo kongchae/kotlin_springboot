@@ -9,7 +9,7 @@
 
     <script language="javascript">
         function show_lesson_popup() { window.open("/lesson", "a", "width=600, height=400, left=100, top=50"); }
-        function show_member_popup() { window.open("/manage/member", "a", "width=600, height=400, left=100, top=50"); }
+        function show_member_popup() { window.open("/manage/member", "a", "width=700, height=500, left=100, top=50"); }
     </script>
 </head>
 <body>
