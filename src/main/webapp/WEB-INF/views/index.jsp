@@ -6,24 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <title>연습실 및 레슨 공간</title>
-
-    <script language="javascript">
-        function show_lesson_popup() { window.open("/lesson", "a", "width=600, height=400, left=100, top=50"); }
-        function show_member_popup() { window.open("/manage/member", "a", "width=700, height=500, left=100, top=50"); }
-    </script>
 </head>
 <body>
-!!!! 여기는 WEB-INF의 views의 JSP index 입니다
-
-<h1 style="text-align:center;"> 연 습 실  공 간</h1>
-
-<div style="text-align:center;">
-    <img src="/resources/images/moon.png" width="25%">
-</div>
-<br/>
-<br/>
-<br/>
-<br/>
+<br/><br/><br/><br/>
+<br/><br/><br/>
 <div style="text-align:center;">
     <span onclick="show_member_popup()" style="cursor:pointer;">회원관리</span>&nbsp
     <span onclick="show_lesson_popup()" style="cursor:pointer;">레슨시간표</span>&nbsp
@@ -48,14 +34,28 @@
 <br/>
 <br/>
 <br/>
-<hr>
-<br/>
-<div style="text-align:center;">
-    <span>위치 : </span>
-</div>
-<div style="text-align:center;">
-    <span>Tel : </span>
-</div>
+
+<script language="javascript">
+    function show_member_popup() { window.open("/manage/member", "a", "width=700, height=500, left=100, top=50"); }
+    // function show_lesson_popup() { window.open("/lesson", "a", "width=700, height=500, left=100, top=50"); }
+    function show_lesson_popup() { window.location.href="/lesson";  }
+</script>
+<style>
+    body {
+        background-image: url("/resources/images/nightSky.jpg");
+        color : white;
+    }
+</style>
+<!--
+Universe Color Scheme
+
+0F193B
+202C54
+353F62
+826B57
+824B31
+733A2A
+-->
 
 </body>
 </html>

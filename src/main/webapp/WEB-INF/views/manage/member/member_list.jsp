@@ -2,12 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <title>회원 목록</title>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="/resources/js/jquery-3.3.1.min.js"></script>
 </head>
 <style>
     .text-center{text-align:center}
@@ -32,7 +33,7 @@
 <br/>
 총 ${totalCount} 명<br/>
 
-<table>
+<table id="allMemberList">
     <thead>
     <tr>
         <th><input type="checkbox" id="check_all" /></th>
@@ -99,7 +100,10 @@
                     ${member.email}
             </td>
             <td class="text-center">
-                    ${member.status}
+                <c:choose>
+                    <c:when test="${member.status eq 1}">승인회원</c:when>
+                    <c:otherwise>비승인회원</c:otherwise>
+                </c:choose>
             </td>
         </tr>
     </c:forEach>
@@ -131,9 +135,6 @@
             return false;
         }
 
-        console.log("### deleteArr => "+JSON.stringify({ 'deleteMembers': deleteMembers }));
-        // deleteMembers = JSON.stringify({ 'deleteMembers': deleteMembers });
-
         if(confirm("정보를 삭제 하시겠습니까?")) {
             $(".wrap-loading").show();
             $.ajax({
@@ -154,17 +155,6 @@
                     return false;
                 }
             });
-
-            //
-            // $.post("/manage/member/delete", { 'deleteMembers': deleteMembers }, function(response) {
-            //     alert( "success" );
-            //     console.log("총 삭제된 멤버수 : " +response);
-            // })
-            //     .fail(function () {
-            //         alert( "error" );
-            //         $(".wrap-loading").hide();
-            //         return false;
-            //     });
         } else {
             $(".wrap-loading").hide();
             return false;

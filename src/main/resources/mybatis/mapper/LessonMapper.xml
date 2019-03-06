@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.smtown.example.kotlindemo.repository.LessonMapper">
+    <resultMap id="LessonMapper" type="Lesson" autoMapping="true">
+        <result property="l_id" column="l_id"/>
+        <result property="start" column="start_time"/>
+        <result property="end" column="end_time"/>
+        <result property="m_id" column="m_id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getAllLessonList" resultMap="LessonMapper">
+        SELECT
+          lesson.`l_id`, lesson.`start_time`, lesson.`end_time`, lesson.`m_id`, m.`name`
+        FROM `lesson_sked` lesson INNER JOIN `member` m ON lesson.m_id = m.m_id
+        ORDER BY lesson.`start_time`
+    </select>
+
+    <insert id="insertLesson" parameterType="Lesson">
+        <selectKey keyProperty="l_id" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `lesson_sked`
+        (`start_time`, `end_time`, `m_id`)
+        VALUES (#{start}, #{end}, #{m_id});
+    </insert>
+
+</mapper>

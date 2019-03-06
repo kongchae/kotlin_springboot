@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <definition name="defaultLayout" template="/WEB-INF/views/layout/default_layout.jsp">
+        <put-attribute name="common.library" value="/WEB-INF/views/common/common.jsp"/>
+        <put-attribute name="title" value=""/>
+        <put-attribute name="stylesheet" value=""/>
+        <put-attribute name="javascript.header" value="/WEB-INF/views/common/javascript_header.jsp"/>
+        <put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+        <put-attribute name="content" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+    </definition>
+
+    <definition name="main" extends="defaultLayout">
+        <put-attribute name="location" value="MAIN"/>
+        <put-attribute name="content" value="/WEB-INF/views/index.jsp"/>
+    </definition>
+
+    <definition name="lesson" extends="defaultLayout">
+        <put-attribute name="location" value="LESSON"/>
+        <put-attribute name="content" value="/WEB-INF/views/manage/lesson/lesson.jsp"/>
+    </definition>
+
+    <definition name="member" extends="defaultLayout">
+        <put-attribute name="location" value="MEMBER"/>
+        <put-attribute name="content" value="/WEB-INF/views/manage/member/member_list.jsp"/>
+    </definition>
+
+    <definition name="error" extends="defaultLayout">
+        <put-attribute name="location" value="error"/>
+        <put-attribute name="content" value="/WEB-INF/views/error/error.jsp"/>
+    </definition>
+
+</tiles-definitions>

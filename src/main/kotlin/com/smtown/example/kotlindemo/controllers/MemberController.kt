@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Controller
-class ManageMemberController {
+class MemberController {
 
     @Autowired
     lateinit var memberService: MemberService
@@ -25,12 +25,11 @@ class ManageMemberController {
         model.addAttribute("memberList", memberList)
         model.addAttribute("totalCount", memberList.size)
 
-        return "manage/member/list"
+        return "member"
     }
 
     @PostMapping("/manage/member/delete")
     @ResponseBody fun memberDelete(@RequestBody deleteMembers: List<Int>, request: HttpServletRequest, response: HttpServletResponse, model: Model) : Int {
-
         println("${deleteMembers.size}명 삭제합니다.")
         val deleteCnt : Int = memberService.deleteMembers(deleteMembers)
         if(deleteCnt > 0) {
@@ -41,5 +40,4 @@ class ManageMemberController {
         }
         return deleteCnt
     }
-
 }

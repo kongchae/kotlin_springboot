@@ -16,6 +16,6 @@ class MainController {
         println(model.toString())
         println("********************")
 
-        return "index"
+        return "main"
     }
 }
